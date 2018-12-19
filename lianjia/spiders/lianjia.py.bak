@@ -1,0 +1,66 @@
+# coding=utf-8
+import scrapy
+
+
+def getList(a):
+    print a
+    if a:
+        if a[0].extract().isdigit():
+            return a[0].extract()
+        return a[0].extract().strip()
+    else:
+        return ""
+
+
+class ToScrapeSpiderXPath(scrapy.Spider):
+    name = 'lianjia'
+
+    box = []
+    for num in range(100):
+        pages = 'https://sh.lianjia.com/zufang/pudong/pg{0}/#contentList'.format(num)
+        box.append(pages)
+    start_urls = box
+    # start_urls = [
+    #     'https://sh.lianjia.com/zufang/pudong',
+    # ]
+
+    def parse(self, response):
+        print response
+        for quote in response.xpath('//div[@class="info-panel"]'):
+            # print quote
+            yield {
+                'title': getList(quote.xpath('.//h2/a/text()')),
+                'link': getList(quote.xpath('.//h2/a/@href')),
+                'community_link': getList(quote.xpath('.//div[@class="col-1"]/div[@class="where"]/a/@href')),
+                'community': getList(
+                    quote.xpath('.//div[@class="col-1"]/div[@class="where"]/a/span[@class="region"]/text()')),
+                'house_type': getList(
+                    quote.xpath('.//div[@class="col-1"]/div[@class="where"]/span[@class="zone"]/span/text()')),
+                'square': getList(
+                    quote.xpath('.//div[@class="col-1"]/div[@class="where"]/span[@class="meters"]/text()')),
+                'direction': getList(
+                    quote.xpath('.//div[@class="col-1"]/div[@class="where"]/span[not(@class)]/text()')),
+
+                # other
+                'con_link': getList(
+                    quote.xpath('.//div[@class="col-1"]/div[@class="other"]/div[@class="con"]/a/@href')),
+                'con_disc': quote.xpath('.//div[@class="col-1"]/div[@class="other"]/div[@class="con"]')[0]
+                    .xpath('string(.)')[0].extract(),
+                # chanquan
+                'chanquan': getList(quote.xpath('.//div[@class="fang-subway-ex"]/span/text()')),
+
+                # col-3
+
+                'last_price': getList(
+                    quote.xpath('.//div[@class="col-3"]/div[@class="price"]/span[@class="num"]/text()')),
+                'price_update_time': getList(quote.xpath('.//div[@class="col-3"]/div[@class="price-pre"]/text()'))
+                #
+
+                # 'watcher': getList(quote.xpath(
+                #     './/div[@class="col-2"]/div[@class="square"]/div[not(@class)]/span[@class="num"]/text()')) + "人看房"
+
+            }
+
+            next_page_url = response.css("li.next > a::attr(href)").extract_first()
+            if next_page_url is not None:
+                yield scrapy.Request(response.urljoin(next_page_url))
