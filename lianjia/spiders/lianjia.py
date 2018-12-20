@@ -42,18 +42,22 @@ class ToScrapeSpiderXPath(scrapy.Spider):
     def parse(self, response):
         print response
         for quote in response.xpath('//div[@class="content__list--item"]'):
+            price = int(quote.xpath('.//span[@class="content__list--item-price"]/em/text()')[0].extract())
             # print quote
             yield {
                 'title': getList(quote.xpath('.//div/p[@class="content__list--item--title twoline"]/a/text()')),
                 'link': baseUrl + getList(quote.xpath('.//div/p[@class="content__list--item--title twoline"]/a/@href')),
-                'house_code': getList(quote.xpath('.//div/p[@class="content__list--item--title twoline"]/a/@href'))[8:-5],
-                'area_link': baseUrl + getList(quote.xpath('.//div/p[@class="content__list--item--des"]/a[position()=1]/@href')),
+                'house_code': getList(quote.xpath('.//div/p[@class="content__list--item--title twoline"]/a/@href'))[
+                              8:-5],
+                'area_link': baseUrl + getList(
+                    quote.xpath('.//div/p[@class="content__list--item--des"]/a[position()=1]/@href')),
                 'area_disc': getList(
                     quote.xpath('.//div/p[@class="content__list--item--des"]/a[position()=1]/text()')),
                 'town_link': baseUrl + getList(
                     quote.xpath('.//div/p[@class="content__list--item--des"]/a[position()=2]/@href')),
                 'town_disc': getList(
                     quote.xpath('.//div/p[@class="content__list--item--des"]/a[position()=2]/text()')),
+                'price': price
             }
 
             # next_page_url = response.css("li.next > a::attr(href)").extract_first()

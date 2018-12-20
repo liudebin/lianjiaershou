@@ -15,12 +15,13 @@ class LianjiaPipeline(object):
         # sql = "INSERT INTO articles(author,title,times,url,admire,likes) VALUES(%s,%s,%s,%s,%s,%s)"
         sql = "INSERT INTO  rent_detail_lianjia(title,link,house_code," \
               "area_link,area_disc,town_link," \
-              "town_disc) " \
-              "VALUES(%s,%s,%s,%s,%s,%s,%s)"
+              "town_disc, price) " \
+              "VALUES(%s,%s,%s,%s,%s,%s,%s, %s)"
         try:
             cursor.execute(sql, (item['title'], item['link'], item['house_code'],
                                  item['area_link'],
-                                 item['area_disc'], item['town_link'], item['town_disc']))
+                                 item['area_disc'], item['town_link'], item['town_disc']
+                                 , item['price']))
             cursor.connection.commit()
         except BaseException as e:
             print("ERROR>>>>>>>>>>>>>", e, "<<<<<<<<<<<<<ERROR")

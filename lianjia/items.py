@@ -18,3 +18,4 @@ class LianjiaItem(scrapy.Item):
     area_disc = scrapy.Field()
     town_link = scrapy.Field()
     town_disc = scrapy.Field()
+    price = scrapy.Field()
