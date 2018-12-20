@@ -1,8 +1,6 @@
 # coding=utf-8
 import scrapy
 
-from msysqlDb import mysqlHadler
-
 baseUrl = 'https://sh.lianjia.com'
 
 
