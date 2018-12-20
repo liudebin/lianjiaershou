@@ -4,23 +4,12 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-
-import pymysql
-def dbHandle():
-    conn = pymysql.connect(
-        host = "localhost",
-        user = "root",
-        passwd = "liudebin-1990",
-        charset = "utf8",
-        use_unicode = False
-    )
-    return conn
-
+from msysqlDb import mysqlHadler
 
 
 class LianjiaPipeline(object):
     def process_item(self,item,spider):
-        dbObject = dbHandle()
+        dbObject = mysqlHadler().dbHandle()
         cursor = dbObject.cursor()
         cursor.execute("USE test")
         # sql = "INSERT INTO articles(author,title,times,url,admire,likes) VALUES(%s,%s,%s,%s,%s,%s)"

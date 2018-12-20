@@ -1,7 +1,7 @@
 # coding=utf-8
 import scrapy
 
-from lianjia.msysqlDb import mysqlHadler
+from msysqlDb import mysqlHadler
 
 baseUrl = 'https://sh.lianjia.com'
 
