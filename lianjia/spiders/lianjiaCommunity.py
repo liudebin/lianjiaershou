@@ -45,6 +45,7 @@ class ToScrapeSpiderXPath(scrapy.Spider):
         print response
         for quote in response.xpath('//div[@class="content__list--item"]'):
             # print quote
+            price = int(quote.xpath('.//span[@class="content__list--item-price"]/em/text()')[0].extract())
             yield {
                 'title': getList(quote.xpath('.//div/p[@class="content__list--item--title twoline"]/a/text()')),
                 'link': baseUrl + getList(quote.xpath('.//div/p[@class="content__list--item--title twoline"]/a/@href')),
@@ -56,6 +57,7 @@ class ToScrapeSpiderXPath(scrapy.Spider):
                     quote.xpath('.//div/p[@class="content__list--item--des"]/a[position()=2]/@href')),
                 'town_disc': getList(
                     quote.xpath('.//div/p[@class="content__list--item--des"]/a[position()=2]/text()')),
+                'price': price
             }
 
             # next_page_url = response.css("li.next > a::attr(href)").extract_first()
