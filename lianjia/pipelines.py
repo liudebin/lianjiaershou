@@ -17,11 +17,13 @@ class LianjiaPipeline(object):
               "area_link,area_disc,town_link," \
               "town_disc, price) " \
               "VALUES(%s,%s,%s,%s,%s,%s,%s, %s)"
+        sql1 = "insert rent_scrapy_tmp(house_code) values(%s) "
         try:
             cursor.execute(sql, (item['title'], item['link'], item['house_code'],
                                  item['area_link'],
                                  item['area_disc'], item['town_link'], item['town_disc']
                                  , item['price']))
+            cursor.execute(sql1, item['house_code'])
             cursor.connection.commit()
         except BaseException as e:
             print("ERROR>>>>>>>>>>>>>", e, "<<<<<<<<<<<<<ERROR")
