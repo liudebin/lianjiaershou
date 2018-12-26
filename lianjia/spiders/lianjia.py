@@ -1,6 +1,8 @@
 # coding=utf-8
 import scrapy
 
+from msysqlDb import mysqlHadler
+
 baseUrl = 'https://sh.lianjia.com'
 
 
@@ -17,6 +19,15 @@ def getList(a):
 class ToScrapeSpiderXPath(scrapy.Spider):
     name = 'lianjia'
 
+    dbObject = mysqlHadler().dbHandle()
+    cursor = dbObject.cursor()
+    cursor.execute("USE test")
+    # sql = "INSERT INTO articles(author,title,times,url,admire,likes) VALUES(%s,%s,%s,%s,%s,%s)"
+    sql = "update rent_detail_lianjia set rent_status = -1 where rent_status <> -1 ;"
+    cursor.execute(sql)
+    cursor.connection.commit()
+
+    
     box = []
     for num in range(102):
         pages = 'https://sh.lianjia.com/zufang/pudong/pg{0}/#contentList'.format(num)
