@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1d840ae1-a1d0-41cf-8d85-5b5ad268719e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/lianjia/pipelines.py" beforeDir="false" afterPath="$PROJECT_DIR$/lianjia/pipelines.py" afterDir="false" />
-    </list>
+    <list default="true" id="1d840ae1-a1d0-41cf-8d85-5b5ad268719e" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,8 +60,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/lianjia/pipelines.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="304">
-                  <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+                <state relative-caret-position="437">
+                  <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
                 </state>
               </provider>
             </entry>
@@ -471,8 +469,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lianjia/pipelines.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="31" column="34" selection-start-line="31" selection-start-column="34" selection-end-line="31" selection-end-column="34" />
+        <state relative-caret-position="437">
+          <caret line="32" column="19" lean-forward="true" selection-start-line="32" selection-start-column="19" selection-end-line="32" selection-end-column="19" />
         </state>
       </provider>
     </entry>

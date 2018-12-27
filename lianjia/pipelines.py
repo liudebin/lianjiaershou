@@ -28,8 +28,8 @@ class LianjiaPipeline(object):
             print("ERROR>>>>>>>>>>>>>", e, "<<<<<<<<<<<<<ERROR")
             dbObject.rollback()
 
-        cursor.execute(sql1, item['house_code'])
-        cursor.connection.commit()
+        # cursor.execute(sql1, item['house_code'])
+        # cursor.connection.commit()
         return item
 
 
