@@ -23,11 +23,13 @@ class LianjiaPipeline(object):
                                  item['area_link'],
                                  item['area_disc'], item['town_link'], item['town_disc']
                                  , item['price']))
-            cursor.execute(sql1, item['house_code'])
             cursor.connection.commit()
         except BaseException as e:
             print("ERROR>>>>>>>>>>>>>", e, "<<<<<<<<<<<<<ERROR")
             dbObject.rollback()
+
+        cursor.execute(sql1, item['house_code'])
+        cursor.connection.commit()
         return item
 
 
