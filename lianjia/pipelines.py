@@ -15,8 +15,8 @@ class LianjiaPipeline(object):
         # sql = "INSERT INTO articles(author,title,times,url,admire,likes) VALUES(%s,%s,%s,%s,%s,%s)"
         sql = "INSERT INTO  rent_detail_lianjia(title,link,house_code," \
               "area_link,area_disc,town_link," \
-              "town_disc, price) " \
-              "VALUES(%s,%s,%s,%s,%s,%s,%s, %s) on duplicate key update rent_detail_lianjia.rent_status = 2 "
+              "town_disc, price, rent_status) " \
+              "VALUES(%s,%s,%s,%s,%s,%s,%s, %s, 0) on duplicate key update rent_status = 2 "
         sql1 = "insert rent_scrapy_tmp(house_code) values(%s) "
         try:
             cursor.execute(sql, (item['title'], item['link'], item['house_code'],
