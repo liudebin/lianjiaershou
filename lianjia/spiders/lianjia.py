@@ -24,6 +24,7 @@ class ToScrapeSpiderXPath(scrapy.Spider):
     cursor.execute("USE test")
     # sql = "INSERT INTO articles(author,title,times,url,admire,likes) VALUES(%s,%s,%s,%s,%s,%s)"
     sql = "update rent_detail_lianjia set rent_status = -1 where rent_status <> -1 ;"
+    sql = "delete from rent_scrapy_tmp;"
     cursor.execute(sql)
     cursor.connection.commit()
 
