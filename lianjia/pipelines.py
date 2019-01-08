@@ -13,16 +13,26 @@ class LianjiaPipeline(object):
         cursor = dbObject.cursor()
         cursor.execute("USE test")
         # sql = "INSERT INTO articles(author,title,times,url,admire,likes) VALUES(%s,%s,%s,%s,%s,%s)"
-        sql = "INSERT INTO  rent_detail_lianjia(title,link,house_code," \
-              "area_link,area_disc,town_link," \
-              "town_disc, price, rent_status) " \
-              "VALUES(%s,%s,%s,%s,%s,%s,%s, %s, 0) on duplicate key update rent_status = 2 "
-        sql1 = "insert rent_scrapy_tmp(house_code) values(%s) "
+        sql = "INSERT INTO  ershoufang_detail_lianjia(title,link,house_code," \
+              "community_code,community_link,community,town_link," \
+              "town_disc, info,chan_quan,follow_info,tags,price,price_content," \
+              "uni_price_content, rent_status) " \
+              "VALUES(%s,%s,%s,%s,%s,%s, %s,%s,%s,%s,%s,%s,%s,%s,%s, 0)" \
+              " on duplicate key update rent_status = 2 "
+        # sql1 = "insert rent_scrapy_tmp(house_code) values(%s) "
         try:
             cursor.execute(sql, (item['title'], item['link'], item['house_code'],
-                                 item['area_link'],
-                                 item['area_disc'], item['town_link'], item['town_disc']
-                                 , item['price']))
+                                 item['community_code'],
+                                 item['community_link'],
+                                 item['community'],
+                                 item['town_link'],
+                                 item['town_disc'],
+                                 item['house_info'],
+                                 item['chan_quan'],
+                                 item['follow_info'],
+                                 item['tags'],
+                                 item['price'],
+                                 item['price_content'], item['unit_price']))
             cursor.connection.commit()
         except BaseException as e:
             print("ERROR>>>>>>>>>>>>>", e, "<<<<<<<<<<<<<ERROR")
