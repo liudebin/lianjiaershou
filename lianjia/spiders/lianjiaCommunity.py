@@ -33,12 +33,12 @@ class ToScrapeSpiderXPath(scrapy.Spider):
     cursor = dbObject.cursor()
     cursor.execute("USE test")
     # sql = "INSERT INTO articles(author,title,times,url,admire,likes) VALUES(%s,%s,%s,%s,%s,%s)"
-    sql = "select distinct community_link link from ershoufang_detail_lianjia where community_code is not null ;"
+    sql = "select distinct community_code link from ershoufang_detail_lianjia where community_code is not null ;"
     cursor.execute(sql)
     results = cursor.fetchall()
     box = []
     for row in results:
-        box.append(row[0])
+        box.append("https://sh.lianjia.com/ershoufang/c" + row[0])
     start_urls = box
 
     def parse(self, response):
