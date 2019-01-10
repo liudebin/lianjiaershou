@@ -38,7 +38,8 @@ class ToScrapeSpiderXPath(scrapy.Spider):
     results = cursor.fetchall()
     box = []
     for row in results:
-        box.append("https://sh.lianjia.com/ershoufang/" + row[0])
+        for num in 50:
+            box.append("https://sh.lianjia.com/ershoufang/" + row[0]+"/pg{0}".format(num))
     start_urls = box
 
     def parse(self, response):
